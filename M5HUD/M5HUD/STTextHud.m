@@ -133,9 +133,9 @@
         }
     }else{
         if (self.hudStyle == STHudSucess) {
-            self.imageV.image = [UIImage imageNamed:@"STSuccess"];
+            self.imageV.image = [UIImage imageNamed:@"M5Bundle.bundle/STSuccess"];
         }else if (self.hudStyle == STHudError){
-            self.imageV.image = [UIImage imageNamed:@"STError"];
+            self.imageV.image = [UIImage imageNamed:@"M5Bundle.bundle/STError"];
         }else if (self.hudStyle == STHudWait){
             [self.waitView startAnimating];
             self.imageV.image = nil;

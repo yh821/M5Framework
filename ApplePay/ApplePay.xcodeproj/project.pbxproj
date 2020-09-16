@@ -17,6 +17,7 @@
 		1B203CA12510B6EA00026A5B /* M5HUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B203C8C2510A00400026A5B /* M5HUD.framework */; };
 		1B203CA22510B6EA00026A5B /* M5HUD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1B203C8C2510A00400026A5B /* M5HUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1B203CAD2511A84900026A5B /* M5Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1B203CAC2511A84900026A5B /* M5Bundle.bundle */; };
+		1B203CB02511BD5F00026A5B /* QYIPAPurchase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B203CAF2511BD5F00026A5B /* QYIPAPurchase.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -48,6 +49,8 @@
 		1B203B23250B81FD00026A5B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1B203C8C2510A00400026A5B /* M5HUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = M5HUD.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/M5Framework-hidnsuynpkcrsmczjvbjcfdjghuk/Build/Products/Debug-iphoneos/M5HUD.framework"; sourceTree = "<group>"; };
 		1B203CAC2511A84900026A5B /* M5Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = M5Bundle.bundle; path = "../../../../../Library/Developer/Xcode/DerivedData/M5Framework-hidnsuynpkcrsmczjvbjcfdjghuk/Build/Products/Debug-iphoneos/M5Bundle.bundle"; sourceTree = "<group>"; };
+		1B203CAE2511BD5F00026A5B /* QYIPAPurchase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYIPAPurchase.h; sourceTree = "<group>"; };
+		1B203CAF2511BD5F00026A5B /* QYIPAPurchase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QYIPAPurchase.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +90,8 @@
 				1B203B15250B81FB00026A5B /* SceneDelegate.m */,
 				1B203B17250B81FB00026A5B /* ViewController.h */,
 				1B203B18250B81FB00026A5B /* ViewController.m */,
+				1B203CAE2511BD5F00026A5B /* QYIPAPurchase.h */,
+				1B203CAF2511BD5F00026A5B /* QYIPAPurchase.m */,
 				1B203B1A250B81FB00026A5B /* Main.storyboard */,
 				1B203B1D250B81FD00026A5B /* Assets.xcassets */,
 				1B203B1F250B81FD00026A5B /* LaunchScreen.storyboard */,
@@ -171,6 +176,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B203B19250B81FB00026A5B /* ViewController.m in Sources */,
+				1B203CB02511BD5F00026A5B /* QYIPAPurchase.m in Sources */,
 				1B203B13250B81FB00026A5B /* AppDelegate.m in Sources */,
 				1B203B24250B81FD00026A5B /* main.m in Sources */,
 				1B203B16250B81FB00026A5B /* SceneDelegate.m in Sources */,
