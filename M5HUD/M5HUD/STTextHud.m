@@ -30,7 +30,12 @@
 @implementation STTextHud
 - (instancetype)init{
     if (self = [super init]) {
-        self = [[NSBundle mainBundle]loadNibNamed:@"STTextHud" owner:nil options:nil][0];
+        //Before======================================================================//
+        //self = [[NSBundle mainBundle]loadNibNamed:@"STTextHud" owner:nil options:nil][0];
+        //After=======================================================================//
+        NSBundle *bundle = [NSBundle bundleWithPath:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"M5Bundle.bundle"]];
+        self = [[bundle loadNibNamed:@"STTextHud" owner:self options:nil] lastObject];
+        //============================================================================//
         self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.9];
         self.priority = Priority_Default;
     }

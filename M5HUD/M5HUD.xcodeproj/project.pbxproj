@@ -3,22 +3,22 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		1B203AF9250B816B00026A5B /* NSString+Size.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B203AED250B816B00026A5B /* NSString+Size.m */; };
-		1B203AFA250B816B00026A5B /* STTextHud.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B203AEE250B816B00026A5B /* STTextHud.xib */; };
 		1B203AFB250B816B00026A5B /* STTextHudTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B203AEF250B816B00026A5B /* STTextHudTool.m */; };
 		1B203AFC250B816B00026A5B /* STTextHud.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B203AF0250B816B00026A5B /* STTextHud.m */; };
-		1B203AFD250B816B00026A5B /* STSuccess@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B203AF1250B816B00026A5B /* STSuccess@2x.png */; };
-		1B203AFE250B816B00026A5B /* angle-mask@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B203AF2250B816B00026A5B /* angle-mask@3x.png */; };
 		1B203AFF250B816B00026A5B /* STTextHud.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B203AF3250B816B00026A5B /* STTextHud.h */; };
-		1B203B00250B816B00026A5B /* STTextHudTool.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B203AF4250B816B00026A5B /* STTextHudTool.h */; };
-		1B203B01250B816B00026A5B /* STError@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B203AF5250B816B00026A5B /* STError@2x.png */; };
+		1B203B00250B816B00026A5B /* STTextHudTool.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B203AF4250B816B00026A5B /* STTextHudTool.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1B203B02250B816B00026A5B /* NSString+Size.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B203AF6250B816B00026A5B /* NSString+Size.h */; };
 		1B203B03250B816B00026A5B /* GCLoadingView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B203AF7250B816B00026A5B /* GCLoadingView.h */; };
 		1B203B04250B816B00026A5B /* GCLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B203AF8250B816B00026A5B /* GCLoadingView.m */; };
+		1B203C9B2510AED700026A5B /* angle-mask@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B203AF2250B816B00026A5B /* angle-mask@3x.png */; platformFilter = ios; };
+		1B203C9C2510AED700026A5B /* STError@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B203AF5250B816B00026A5B /* STError@2x.png */; platformFilter = ios; };
+		1B203C9D2510AED700026A5B /* STSuccess@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B203AF1250B816B00026A5B /* STSuccess@2x.png */; platformFilter = ios; };
+		1B203C9E2510AED700026A5B /* STTextHud.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B203AEE250B816B00026A5B /* STTextHud.xib */; platformFilter = ios; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,10 +36,19 @@
 		1B203AF6250B816B00026A5B /* NSString+Size.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Size.h"; sourceTree = "<group>"; };
 		1B203AF7250B816B00026A5B /* GCLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCLoadingView.h; sourceTree = "<group>"; };
 		1B203AF8250B816B00026A5B /* GCLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCLoadingView.m; sourceTree = "<group>"; };
+		1B203C952510ACB300026A5B /* M5Bundle.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = M5Bundle.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		1B203C972510ACB300026A5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		1B203ADF250B813F00026A5B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1B203C922510ACB300026A5B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -53,6 +62,7 @@
 			isa = PBXGroup;
 			children = (
 				1B203AE4250B813F00026A5B /* M5HUD */,
+				1B203C962510ACB300026A5B /* M5Bundle */,
 				1B203AE3250B813F00026A5B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -61,6 +71,7 @@
 			isa = PBXGroup;
 			children = (
 				1B203AE2250B813F00026A5B /* M5HUD.framework */,
+				1B203C952510ACB300026A5B /* M5Bundle.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -68,21 +79,29 @@
 		1B203AE4250B813F00026A5B /* M5HUD */ = {
 			isa = PBXGroup;
 			children = (
-				1B203AF2250B816B00026A5B /* angle-mask@3x.png */,
 				1B203AF7250B816B00026A5B /* GCLoadingView.h */,
 				1B203AF8250B816B00026A5B /* GCLoadingView.m */,
 				1B203AF6250B816B00026A5B /* NSString+Size.h */,
 				1B203AED250B816B00026A5B /* NSString+Size.m */,
-				1B203AF5250B816B00026A5B /* STError@2x.png */,
-				1B203AF1250B816B00026A5B /* STSuccess@2x.png */,
 				1B203AF3250B816B00026A5B /* STTextHud.h */,
 				1B203AF0250B816B00026A5B /* STTextHud.m */,
-				1B203AEE250B816B00026A5B /* STTextHud.xib */,
 				1B203AF4250B816B00026A5B /* STTextHudTool.h */,
 				1B203AEF250B816B00026A5B /* STTextHudTool.m */,
 				1B203AE6250B813F00026A5B /* Info.plist */,
 			);
 			path = M5HUD;
+			sourceTree = "<group>";
+		};
+		1B203C962510ACB300026A5B /* M5Bundle */ = {
+			isa = PBXGroup;
+			children = (
+				1B203AF2250B816B00026A5B /* angle-mask@3x.png */,
+				1B203AF5250B816B00026A5B /* STError@2x.png */,
+				1B203AF1250B816B00026A5B /* STSuccess@2x.png */,
+				1B203AEE250B816B00026A5B /* STTextHud.xib */,
+				1B203C972510ACB300026A5B /* Info.plist */,
+			);
+			path = M5Bundle;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -92,8 +111,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1B203B03250B816B00026A5B /* GCLoadingView.h in Headers */,
 				1B203B00250B816B00026A5B /* STTextHudTool.h in Headers */,
+				1B203B03250B816B00026A5B /* GCLoadingView.h in Headers */,
 				1B203B02250B816B00026A5B /* NSString+Size.h in Headers */,
 				1B203AFF250B816B00026A5B /* STTextHud.h in Headers */,
 			);
@@ -120,6 +139,23 @@
 			productReference = 1B203AE2250B813F00026A5B /* M5HUD.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		1B203C942510ACB300026A5B /* M5Bundle */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1B203C982510ACB300026A5B /* Build configuration list for PBXNativeTarget "M5Bundle" */;
+			buildPhases = (
+				1B203C912510ACB300026A5B /* Sources */,
+				1B203C922510ACB300026A5B /* Frameworks */,
+				1B203C932510ACB300026A5B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = M5Bundle;
+			productName = M5Bundle;
+			productReference = 1B203C952510ACB300026A5B /* M5Bundle.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -130,6 +166,9 @@
 				ORGANIZATIONNAME = "M1-MacPro";
 				TargetAttributes = {
 					1B203AE1250B813F00026A5B = {
+						CreatedOnToolsVersion = 11.2.1;
+					};
+					1B203C942510ACB300026A5B = {
 						CreatedOnToolsVersion = 11.2.1;
 					};
 				};
@@ -148,6 +187,7 @@
 			projectRoot = "";
 			targets = (
 				1B203AE1250B813F00026A5B /* M5HUD */,
+				1B203C942510ACB300026A5B /* M5Bundle */,
 			);
 		};
 /* End PBXProject section */
@@ -157,10 +197,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1B203B01250B816B00026A5B /* STError@2x.png in Resources */,
-				1B203AFA250B816B00026A5B /* STTextHud.xib in Resources */,
-				1B203AFD250B816B00026A5B /* STSuccess@2x.png in Resources */,
-				1B203AFE250B816B00026A5B /* angle-mask@3x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1B203C932510ACB300026A5B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1B203C9B2510AED700026A5B /* angle-mask@3x.png in Resources */,
+				1B203C9C2510AED700026A5B /* STError@2x.png in Resources */,
+				1B203C9D2510AED700026A5B /* STSuccess@2x.png in Resources */,
+				1B203C9E2510AED700026A5B /* STTextHud.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,6 +222,13 @@
 				1B203B04250B816B00026A5B /* GCLoadingView.m in Sources */,
 				1B203AFC250B816B00026A5B /* STTextHud.m in Sources */,
 				1B203AFB250B816B00026A5B /* STTextHudTool.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1B203C912510ACB300026A5B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,9 +354,10 @@
 		1B203AEB250B813F00026A5B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEAD_CODE_STRIPPING = NO;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -313,10 +368,12 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				LINK_WITH_STANDARD_LIBRARIES = NO;
+				LINK_WITH_STANDARD_LIBRARIES = YES;
 				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = com.7yao.M5HUD;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -325,9 +382,10 @@
 		1B203AEC250B813F00026A5B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEAD_CODE_STRIPPING = NO;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -338,12 +396,63 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				LINK_WITH_STANDARD_LIBRARIES = NO;
+				LINK_WITH_STANDARD_LIBRARIES = YES;
 				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = com.7yao.M5HUD;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		1B203C992510ACB300026A5B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = NO;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = M5Bundle/Info.plist;
+				INSTALL_PATH = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.7yao.M5Bundle;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = NO;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		1B203C9A2510ACB300026A5B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = NO;
+				COPY_PHASE_STRIP = YES;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = M5Bundle/Info.plist;
+				INSTALL_PATH = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.7yao.M5Bundle;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = NO;
+				WRAPPER_EXTENSION = bundle;
 			};
 			name = Release;
 		};
@@ -364,6 +473,15 @@
 			buildConfigurations = (
 				1B203AEB250B813F00026A5B /* Debug */,
 				1B203AEC250B813F00026A5B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1B203C982510ACB300026A5B /* Build configuration list for PBXNativeTarget "M5Bundle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1B203C992510ACB300026A5B /* Debug */,
+				1B203C9A2510ACB300026A5B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
