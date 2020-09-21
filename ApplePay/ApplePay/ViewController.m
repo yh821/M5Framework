@@ -8,9 +8,16 @@
 
 #import "ViewController.h"
 #import "QYIPAPurchase.h"
+#import <FBSDKShareKit/FBSDKShareKit.h>
 #import <LocalAuthentication/LocalAuthentication.h>
+#import <MobileCoreServices/MobileCoreServices.h>
 
-@interface ViewController ()
+//#import <AVFoundation/AVCaptureDevice.h>
+//#import <AVFoundation/AVMediaFormat.h>
+//#import <Photos/Photos.h>
+//#import <AssetsLibrary/AssetsLibrary.h>
+
+@interface ViewController ()<FBSDKSharingDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 @end
 
@@ -23,13 +30,34 @@
 
 - (IBAction)onClickPay:(id)sender {
     [STTextHudTool showWaitText:@"正在加载" delay:30];
-    [[QYIPAPurchase manager] WJbuyProductWithProductID:self.textField.text payResult:^(BOOL isSuccess, NSString *certificate, NSString *errorMsg) {
+    [[QYIPAPurchase manager] WJbuyProductWithProductID:@"com.abiawyia.iuui.6" payResult:^(BOOL isSuccess, NSString *receipt, NSString *errorMsg) {
         if (isSuccess) {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-                [STTextHudTool showSuccessText:certificate withSecond:2];
+                [STTextHudTool showSuccessText:receipt withSecond:2];
             });
             NSLog(@"苹果充值成功，通知后台到账");
-        }else{
+
+            //验证凭据，获取到苹果返回的交易凭据
+            //发送POST请求，对购买凭据进行验证
+            //测试验证地址
+            NSString *AppStore_URL = @"https://sandbox.itunes.apple.com/verifyReceipt";
+            //正式验证地址
+            //NSString *AppStore_URL = @"https://buy.itunes.apple.com/verifyReceipt";
+            NSURL *url = [NSURL URLWithString:AppStore_URL];
+            NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:15.0f];
+            urlRequest.HTTPMethod = @"POST";
+            NSString *payload = [NSString stringWithFormat:@"{\"receipt-data\" : \"%@\"}", receipt];
+            NSLog(@"发送验证:%@",payload);
+            NSData *payloadData = [payload dataUsingEncoding:NSUTF8StringEncoding];
+            urlRequest.HTTPBody = payloadData;
+            NSData *result = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:nil error:nil];
+            if (result == nil) {
+                NSLog(@"验证失败");
+                return;
+            }
+            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingAllowFragments error:nil];
+            NSLog(@"验证成功后的数据:%@",dic);
+        } else {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
                 [STTextHudTool showErrorText:errorMsg withSecond:2];
             });
@@ -38,10 +66,74 @@
     }];
 }
 
+- (void)RequestApplyURL:(NSString*)urlStr
+{
+    NSURLRequest *resquest = [[NSURLRequest alloc]initWithURL:[[NSURL alloc]initWithString:urlStr] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:30.0];
+    NSURLSessionConfiguration * configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession * session = [NSURLSession sessionWithConfiguration:configuration];
+    NSURLSessionDataTask * dataTask = [session dataTaskWithRequest:resquest completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        //NSLog(@"______%@",[NSThread currentThread]);
+        NSLog(@"response = %@",response);
+        if (data) {
+            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+            NSLog(@"验证成功后的数据:%@",dic);
+        }
+    }];
+    [dataTask resume];
+}
+
+#pragma mark - Facebook
+- (IBAction)onClickShareLink:(id)sender {
+    FBSDKShareLinkContent *linkContent = [[FBSDKShareLinkContent alloc] init];
+    linkContent.contentURL = [NSURL URLWithString:@"https://image.baidu.com"];
+    //分享对话框
+    [FBSDKShareDialog showFromViewController:self withContent:linkContent delegate:self];
+}
+
+- (IBAction)onClickSharePhoto:(id)sender {
+    UIImagePickerController *pickerController = [[UIImagePickerController alloc] init];
+    pickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    pickerController.mediaTypes = @[(NSString *)kUTTypeMovie, (NSString *)kUTTypeImage];
+    pickerController.delegate = self;
+    [self presentViewController:pickerController animated:YES completion:nil];
+}
+
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info
+{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    //UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
+    NSString *mediaType = info[UIImagePickerControllerMediaType];
+    if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
+        //选择的是图片的时候
+        NSURL *url = info[UIImagePickerControllerImageURL];
+        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+        FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
+        photo.image = image;
+        photo.userGenerated = YES;
+        FBSDKSharePhotoContent *content = [[FBSDKSharePhotoContent alloc] init];
+        content.photos = @[photo];
+        [FBSDKShareDialog showFromViewController:self withContent:content delegate:self];
+    } else if ([mediaType isEqualToString:(NSString *)kUTTypeMovie]) {
+        //选择是视频的时候
+        NSURL *url = info[UIImagePickerControllerPHAsset];
+        FBSDKShareVideo *video = [[FBSDKShareVideo alloc] init];
+        video.videoURL = url;
+        FBSDKShareVideoContent *content = [[FBSDKShareVideoContent alloc] init];
+        content.video = video;
+        [FBSDKShareDialog showFromViewController:self withContent:content delegate:self];
+    }
+}
+
+
+#pragma mark - Touch ID
 - (IBAction)onClickTouchID:(id)sender {
     [self loadAuthentication];
 }
-
 /**
  * 指纹登录验证
  */
@@ -160,6 +252,64 @@
             }
         }
     }
+}
+
+
+#pragma mark - FacebookFBSDKSharingDelegate
+- (void)sharer:(nonnull id<FBSDKSharing>)sharer didCompleteWithResults:(nonnull NSDictionary<NSString *,id> *)results {
+    NSLog(@"Facebook分享成功");
+}
+
+- (void)sharer:(nonnull id<FBSDKSharing>)sharer didFailWithError:(nonnull NSError *)error {
+    NSLog(@"Facebook分享失败:%@",error.localizedDescription);
+}
+
+- (void)sharerDidCancel:(nonnull id<FBSDKSharing>)sharer {
+    NSLog(@"取消Facebook分享");
+}
+
+- (void)encodeWithCoder:(nonnull NSCoder *)coder {
+    
+}
+
+- (void)traitCollectionDidChange:(nullable UITraitCollection *)previousTraitCollection {
+    
+}
+
+- (void)preferredContentSizeDidChangeForChildContentContainer:(nonnull id<UIContentContainer>)container {
+    
+}
+
+- (CGSize)sizeForChildContentContainer:(nonnull id<UIContentContainer>)container withParentContainerSize:(CGSize)parentSize {
+    return CGSizeMake(0, 0);
+}
+
+- (void)systemLayoutFittingSizeDidChangeForChildContentContainer:(nonnull id<UIContentContainer>)container {
+    
+}
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(nonnull id<UIViewControllerTransitionCoordinator>)coordinator {
+    
+}
+
+- (void)willTransitionToTraitCollection:(nonnull UITraitCollection *)newCollection withTransitionCoordinator:(nonnull id<UIViewControllerTransitionCoordinator>)coordinator {
+    
+}
+
+- (void)didUpdateFocusInContext:(nonnull UIFocusUpdateContext *)context withAnimationCoordinator:(nonnull UIFocusAnimationCoordinator *)coordinator {
+    
+}
+
+- (void)setNeedsFocusUpdate {
+    
+}
+
+- (BOOL)shouldUpdateFocusInContext:(nonnull UIFocusUpdateContext *)context {
+    return NO;
+}
+
+- (void)updateFocusIfNeeded {
+    
 }
 
 @end

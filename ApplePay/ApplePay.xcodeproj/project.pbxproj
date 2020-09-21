@@ -15,21 +15,24 @@
 		1B203B21250B81FD00026A5B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B203B1F250B81FD00026A5B /* LaunchScreen.storyboard */; };
 		1B203B24250B81FD00026A5B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B203B23250B81FD00026A5B /* main.m */; };
 		1B203CA12510B6EA00026A5B /* M5HUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B203C8C2510A00400026A5B /* M5HUD.framework */; };
-		1B203CA22510B6EA00026A5B /* M5HUD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1B203C8C2510A00400026A5B /* M5HUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1B203CAD2511A84900026A5B /* M5Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1B203CAC2511A84900026A5B /* M5Bundle.bundle */; };
 		1B203CB02511BD5F00026A5B /* QYIPAPurchase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B203CAF2511BD5F00026A5B /* QYIPAPurchase.m */; };
+		1B203CDA25123D1300026A5B /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B203CD825123D1200026A5B /* FBSDKCoreKit.framework */; };
+		1B203CDB25123EE900026A5B /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B203CD725123D1200026A5B /* FBSDKShareKit.framework */; };
+		1B203CDE25123FAB00026A5B /* FBSDKCoreKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1B203CD825123D1200026A5B /* FBSDKCoreKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1B203CDF25123FAF00026A5B /* FBSDKShareKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1B203CD725123D1200026A5B /* FBSDKShareKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		1B203CA32510B6EA00026A5B /* Embed Frameworks */ = {
+		1B203CDD25123F9F00026A5B /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				1B203CA22510B6EA00026A5B /* M5HUD.framework in Embed Frameworks */,
+				1B203CDF25123FAF00026A5B /* FBSDKShareKit.framework in CopyFiles */,
+				1B203CDE25123FAB00026A5B /* FBSDKCoreKit.framework in CopyFiles */,
 			);
-			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -51,6 +54,8 @@
 		1B203CAC2511A84900026A5B /* M5Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = M5Bundle.bundle; path = "../../../../../Library/Developer/Xcode/DerivedData/M5Framework-hidnsuynpkcrsmczjvbjcfdjghuk/Build/Products/Debug-iphoneos/M5Bundle.bundle"; sourceTree = "<group>"; };
 		1B203CAE2511BD5F00026A5B /* QYIPAPurchase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYIPAPurchase.h; sourceTree = "<group>"; };
 		1B203CAF2511BD5F00026A5B /* QYIPAPurchase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QYIPAPurchase.m; sourceTree = "<group>"; };
+		1B203CD725123D1200026A5B /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		1B203CD825123D1200026A5B /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,7 +63,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B203CDA25123D1300026A5B /* FBSDKCoreKit.framework in Frameworks */,
 				1B203CA12510B6EA00026A5B /* M5HUD.framework in Frameworks */,
+				1B203CDB25123EE900026A5B /* FBSDKShareKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +91,8 @@
 		1B203B10250B81FB00026A5B /* ApplePay */ = {
 			isa = PBXGroup;
 			children = (
+				1B203CD825123D1200026A5B /* FBSDKCoreKit.framework */,
+				1B203CD725123D1200026A5B /* FBSDKShareKit.framework */,
 				1B203B11250B81FB00026A5B /* AppDelegate.h */,
 				1B203B12250B81FB00026A5B /* AppDelegate.m */,
 				1B203B14250B81FB00026A5B /* SceneDelegate.h */,
@@ -113,7 +122,7 @@
 				1B203B0A250B81FB00026A5B /* Sources */,
 				1B203B0B250B81FB00026A5B /* Frameworks */,
 				1B203B0C250B81FB00026A5B /* Resources */,
-				1B203CA32510B6EA00026A5B /* Embed Frameworks */,
+				1B203CDD25123F9F00026A5B /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -321,7 +330,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = 5QACXP9K2V;
+				DEVELOPMENT_TEAM = U5R45ABPH8;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ApplePay",
@@ -335,9 +344,9 @@
 					"-all_load",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ncmmv.lwdoof;
+				PRODUCT_BUNDLE_IDENTIFIER = com.abiawyia.iuui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = kdodoq_dev;
+				PROVISIONING_PROFILE_SPECIFIER = iuui_dev;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -348,7 +357,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = 5QACXP9K2V;
+				DEVELOPMENT_TEAM = U5R45ABPH8;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ApplePay",
@@ -362,9 +371,9 @@
 					"-all_load",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ncmmv.lwdoof;
+				PRODUCT_BUNDLE_IDENTIFIER = com.abiawyia.iuui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = kdodoq_dev;
+				PROVISIONING_PROFILE_SPECIFIER = iuui_dev;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

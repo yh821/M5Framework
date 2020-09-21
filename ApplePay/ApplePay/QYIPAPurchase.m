@@ -44,58 +44,45 @@
     }
 }
 
--(void)requestProductInfo:(NSString *)productID{
-    
+-(void)requestProductInfo:(NSString *)productID
+{
     NSSet *nsset = [NSSet setWithObject:productID];
-    
     request=[[SKProductsRequest alloc] initWithProductIdentifiers:nsset];
-    
     request.delegate=self;
-    
     [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
-    
-    
     [request start];
-    
 }
 
 // 查询成功后的回调
 - (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response
 {
     NSLog(@"-----------收到产品反馈信息--------------");
-    
     NSArray *myProduct = response.products;
-    
-    NSLog(@"无效产品Product ID:%@",response.invalidProductIdentifiers);
-    //[STTextHudTool showErrorText:[NSString stringWithFormat:@"无效产品Product ID:%@",response.invalidProductIdentifiers]];
-    
     if (myProduct.count==0) {
-        NSLog(@"无法获取产品信息，购买失败");
         if (self.payResultBlock) {
             self.payResultBlock(NO, nil, @"无法获取产品信息，购买失败");
         }
         return;
     }
     for(SKProduct *product in myProduct){
-        NSLog(@"SKProduct 描述信息%@", [product description]);
-        NSLog(@"产品标题 %@" , product.localizedTitle);
+        NSLog(@"SKProduct描述信息: %@", [product description]);
+        NSLog(@"产品标题: %@" , product.localizedTitle);
         NSLog(@"产品描述信息: %@" , product.localizedDescription);
         NSLog(@"价格: %@" , product.price);
-        NSLog(@"Product id: %@" , product.productIdentifier);
+        NSLog(@"ProductID: %@" , product.productIdentifier);
     }
     SKPayment *payment = nil;
     payment  = [SKPayment paymentWithProduct:myProduct.firstObject];
     [[SKPaymentQueue defaultQueue] addPayment:payment];
-    
 }
-//查询失败后的回调
-- (void)request:(SKRequest *)request didFailWithError:(NSError *)error {
-    NSLog(@"请求苹果服务器失败%@",[error localizedDescription]);
 
+//查询失败后的回调
+- (void)request:(SKRequest *)request didFailWithError:(NSError *)error
+{
+    NSLog(@"请求苹果服务器失败%@",[error localizedDescription]);
     if (self.payResultBlock) {
         self.payResultBlock(NO, nil, [error localizedDescription]);
     }
-    
 }
 
 //如果没有设置监听购买结果将直接跳至反馈结束；
@@ -105,12 +92,10 @@
 }
 
 #pragma mark ------------------------- 监听结果
-
-- (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray<SKPaymentTransaction *> *)transactions {
-
+- (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray<SKPaymentTransaction *> *)transactions
+{
     //当用户购买的操作有结果时，就会触发下面的回调函数，
     for (SKPaymentTransaction *transaction in transactions) {
-        
         switch (transaction.transactionState) {
             case SKPaymentTransactionStatePurchased://交易成功
             {
@@ -147,11 +132,10 @@
 {
     NSLog(@"购买成功验证订单");
     NSData *data = [NSData dataWithContentsOfFile:[[[NSBundle mainBundle] appStoreReceiptURL] path]];
-    NSString *result = [data base64EncodedStringWithOptions:0];
+    NSString *receipt = [data base64EncodedStringWithOptions:0];
     if (self.payResultBlock) {
-        self.payResultBlock(YES, result, nil);
+        self.payResultBlock(YES, receipt, transaction.transactionIdentifier);
     }
-    
 }
 
 //交易失败处理
