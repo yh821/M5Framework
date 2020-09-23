@@ -29,41 +29,46 @@
 }
 
 - (IBAction)onClickPay:(id)sender {
-    [STTextHudTool showWaitText:@"正在加载" delay:30];
+    [STTextHudTool showWaitText:@"正在加载" delay:120];
     [[QYIPAPurchase manager] WJbuyProductWithProductID:@"com.abiawyia.iuui.6" payResult:^(BOOL isSuccess, NSString *receipt, NSString *errorMsg) {
         if (isSuccess) {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
                 [STTextHudTool showSuccessText:receipt withSecond:2];
             });
             NSLog(@"苹果充值成功，通知后台到账");
-
-            //验证凭据，获取到苹果返回的交易凭据
-            //发送POST请求，对购买凭据进行验证
-            //测试验证地址
-            NSString *AppStore_URL = @"https://sandbox.itunes.apple.com/verifyReceipt";
-            //正式验证地址
-            //NSString *AppStore_URL = @"https://buy.itunes.apple.com/verifyReceipt";
-            NSURL *url = [NSURL URLWithString:AppStore_URL];
-            NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:15.0f];
-            urlRequest.HTTPMethod = @"POST";
-            NSString *payload = [NSString stringWithFormat:@"{\"receipt-data\" : \"%@\"}", receipt];
-            NSLog(@"发送验证:%@",payload);
-            NSData *payloadData = [payload dataUsingEncoding:NSUTF8StringEncoding];
-            urlRequest.HTTPBody = payloadData;
-            NSData *result = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:nil error:nil];
-            if (result == nil) {
-                NSLog(@"验证失败");
-                return;
-            }
-            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingAllowFragments error:nil];
-            NSLog(@"验证成功后的数据:%@",dic);
+            //向苹果验证收据
+            [self CheckReceipt:receipt];
         } else {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
                 [STTextHudTool showErrorText:errorMsg withSecond:2];
             });
-            NSLog(@"内购失败%@",errorMsg);
+            NSLog(@"%@", errorMsg);
         }
     }];
+}
+
+- (void)CheckReceipt:(NSString*)receipt
+{
+    //验证凭据，获取到苹果返回的交易凭据
+    //发送POST请求，对购买凭据进行验证
+    //测试验证地址
+    NSString *AppStore_URL = @"https://sandbox.itunes.apple.com/verifyReceipt";
+    //正式验证地址
+    //NSString *AppStore_URL = @"https://buy.itunes.apple.com/verifyReceipt";
+    NSURL *url = [NSURL URLWithString:AppStore_URL];
+    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:15.0f];
+    urlRequest.HTTPMethod = @"POST";
+    NSString *payload = [NSString stringWithFormat:@"{\"receipt-data\" : \"%@\"}", receipt];
+    NSLog(@"发送验证:%@",payload);
+    NSData *payloadData = [payload dataUsingEncoding:NSUTF8StringEncoding];
+    urlRequest.HTTPBody = payloadData;
+    NSData *result = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:nil error:nil];
+    if (result == nil) {
+        NSLog(@"验证失败");
+        return;
+    }
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingAllowFragments error:nil];
+    NSLog(@"验证成功后的数据:%@",dic);
 }
 
 - (void)RequestApplyURL:(NSString*)urlStr

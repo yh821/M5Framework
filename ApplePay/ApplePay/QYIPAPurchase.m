@@ -34,13 +34,13 @@
 -(void)WJbuyProductWithProductID:(NSString *)productID payResult:(PayResult)payResult{
     self.payResultBlock = payResult;
     if (productID==nil || !productID.length) {
-        //[STTextHudTool showErrorText:@"产品ID不能为空"];
+        [STTextHudTool showErrorText:@"产品ID不能为空"];
         return;
     }
     if ([SKPaymentQueue canMakePayments]) {
         [self requestProductInfo:productID];
     } else {
-        //[STTextHudTool showErrorText:@"不支持购买"];
+        [STTextHudTool showErrorText:@"不支持购买"];
     }
 }
 
@@ -142,13 +142,34 @@
 - (void)failedTransaction:(SKPaymentTransaction *)transaction
 {
     NSString *error = nil;
-    if(transaction.error.code != SKErrorPaymentCancelled) {
-        NSLog(@"购买失败");
-        error = @"购买失败";
-    } else {
-        NSLog(@"用户取消交易");
-        error = @"用户取消交易";
-        
+    switch (transaction.error.code) {
+        case SKErrorUnknown:
+            error = @"无法连接iTunes Store";
+            break;
+        case SKErrorClientInvalid:
+            error = @"客户端验证错误";
+            break;
+        case SKErrorPaymentCancelled:
+            error = @"用户取消交易";
+            break;
+        case SKErrorPaymentInvalid:
+            error = @"购买商品标识无效";
+            break;
+        case SKErrorPaymentNotAllowed:
+            error = @"设备无法购买商品";
+            break;
+        case SKErrorStoreProductNotAvailable:
+            error = @"商品不可购买";
+            break;
+        case SKErrorCloudServicePermissionDenied:
+            error = @"用户已不允许访问云服务信息";
+            break;
+        case SKErrorCloudServiceNetworkConnectionFailed:
+            error = @"设备没有联网";
+            break;
+        default:
+            error = @"购买失败";
+            break;
     }
     [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
     if (self.payResultBlock) {

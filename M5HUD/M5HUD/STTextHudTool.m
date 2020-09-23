@@ -8,12 +8,13 @@
 
 #import "STTextHudTool.h"
 #import "STTextHud.h"
-#define defaultDely 1.5
-//超长时间
-#define timeOut   15
+
+#define defaultDelay 2
+#define timeOut 30
+
 @implementation STTextHudTool
 + (void)showText:(NSString *)text{
-    [self showText:text withSecond:defaultDely];
+    [self showText:text withSecond:defaultDelay];
 }
 + (void)showText:(NSString *)text withSecond:(NSInteger)delay{
     STTextHud * hud = [[STTextHud alloc]init];
@@ -21,7 +22,7 @@
     [hud showText:text withSecond:delay];
 }
 + (void)showSuccessText:(NSString *)text{
-    [self showSuccessText:text withSecond:defaultDely];
+    [self showSuccessText:text withSecond:defaultDelay];
 }
 + (void)showSuccessText:(NSString *)text withSecond:(NSInteger)delay{
     STTextHud * hud = [[STTextHud alloc]init];
@@ -29,7 +30,7 @@
     [hud showText:text withSecond:delay];
 }
 + (void)showErrorText:(NSString *)text{
-    [self showErrorText:text withSecond:defaultDely];
+    [self showErrorText:text withSecond:defaultDelay];
 }
 + (void)showErrorText:(NSString *)text withSecond:(NSInteger)delay{
     STTextHud * hud = [[STTextHud alloc]init];
