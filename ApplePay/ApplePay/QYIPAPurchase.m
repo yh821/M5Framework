@@ -153,19 +153,40 @@
             error = @"用户取消交易";
             break;
         case SKErrorPaymentInvalid:
-            error = @"购买商品标识无效";
+            error = @"商品标识无效";
             break;
         case SKErrorPaymentNotAllowed:
             error = @"设备无法购买商品";
             break;
         case SKErrorStoreProductNotAvailable:
-            error = @"商品不可购买";
+            error = @"商店商品不可购买";
             break;
         case SKErrorCloudServicePermissionDenied:
-            error = @"用户已不允许访问云服务信息";
+            error = @"用户不允许访问云服务信息";
             break;
         case SKErrorCloudServiceNetworkConnectionFailed:
             error = @"设备没有联网";
+            break;
+        case SKErrorCloudServiceRevoked:
+            error = @"用户已取消使用云服务的权限";
+            break;
+        case SKErrorPrivacyAcknowledgementRequired:
+            error = @"用户需要承认苹果的隐私政策";
+            break;
+        case SKErrorUnauthorizedRequestData:
+            error = @"应用无SKPayment.requestData权限";
+            break;
+        case SKErrorInvalidOfferIdentifier:
+            error = @"指定的订阅发行标识无效";
+            break;
+        case SKErrorInvalidSignature:
+            error = @"提供的加密签名无效";
+            break;
+        case SKErrorMissingOfferParams:
+            error = @"SKPaymentDiscount中缺少一个或多个参数";
+            break;
+        case SKErrorInvalidOfferPrice:
+            error = @"所选报价的价格无效";
             break;
         default:
             error = @"购买失败";

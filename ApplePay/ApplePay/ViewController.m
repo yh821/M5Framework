@@ -29,7 +29,7 @@
 }
 
 - (IBAction)onClickPay:(id)sender {
-    [STTextHudTool showWaitText:@"正在加载" delay:120];
+    [STTextHudTool showWaitText:@"正在加载" withSecond:120];
     [[QYIPAPurchase manager] WJbuyProductWithProductID:@"com.abiawyia.iuui.6" payResult:^(BOOL isSuccess, NSString *receipt, NSString *errorMsg) {
         if (isSuccess) {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
@@ -137,8 +137,7 @@
 
 #pragma mark - Touch ID
 - (IBAction)onClickTouchID:(id)sender {
-    //[self loadAuthentication];
-    [self CheckReceipt:@""];
+    [self loadAuthentication];
 }
 /**
  * 指纹登录验证

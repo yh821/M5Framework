@@ -37,7 +37,7 @@
     hud.hudStyle = STHudError;
     [hud showText:text withSecond:delay];
 }
-+ (void)showWaitText:(NSString *)text delay:(NSInteger)delay{
++ (void)showWaitText:(NSString *)text withSecond:(NSInteger)delay{
     STTextHud * hud = [[STTextHud alloc]init];
     hud.hudStyle = STHudWait;
     [hud showText:text withSecond:delay];
